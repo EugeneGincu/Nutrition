@@ -3,16 +3,99 @@
     <head>
         <title>Nutrition</title>
         <link href="Stylesheets/stylesheet.css" rel="stylesheet" />
-
     </head>
     <body>
-        <table>
-            <tr>
-                <th>Index</th>
-                <th>Name</th>
-                <th>Temp</th>
-            </tr>
-        </table>
-        <script src="Scripts/script.js"></script>
+        <div>
+            <form>
+                <fieldset id="filter">
+                    <legend>Filter</legend>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name"/>
+                        <input type="button" value="Clear" onsubmit="return false;"/>
+                    </div>
+                    <div>
+                        <label for="channels">Channels</label>
+                        <select id="channels" size=5 multiple>
+                            <option value="Pancreas">Pancreas</option>
+                            <option value="Adrenal">Adrenal</option>
+                            <option value="Uter">Prostate</option>
+                            <option value="LV">Liver</option>
+                            <option value="GB">GB</option>
+                            <option value="SP">Spleen</option>
+                            <option value="ST">Stomach</option>
+                            <option value="HT">Heart</option>
+                            <option value="SI">SI</option>
+                            <option value="PC">Pericardium</option>
+                            <option value="SJ">SanJiao</option>
+                            <option value="UB">UB</option>
+                            <option value="KD">Kidney</option>
+                            <option value="LU">Lungs</option>
+                            <option value="LI">LI</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="temp">Temp</label>
+                        <select id="temp">
+                            <option value="">Any</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Warm">Warm</option>
+                            <option value="Neutral">Neutral</option>
+                            <option value="Cool">Cool</option>
+                            <option value="Cold">Cold</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tonifies">Tonifies</label>
+                        <select id="tonifies" size=5 multiple>
+                            <option value="Qi">Qi</option>
+                            <option value="Yang">Yang</option>
+                            <option value="Blood">Blood</option>
+                            <option value="Jing">Jing</option>
+                            <option value="Yin">Yin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="properties">Properties</label>
+                        <select id="properties" size=5 multiple>
+                            <option value="Damp">Damp</option>
+                            <option value="Water">Water</option>
+                            <option value="Phlegm">Phlegm</option>
+                            <option value="Heat">Heat</option>
+                            <option value="Dry">Dry</option>
+                            <option value="Cold">Cold</option>
+                            <option value="Toxin">Toxin</option>
+                            <option value="Moist">Moist</option>
+                            <option value="Blood">Blood</option>
+                            <option value="Wind">Wind</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="reset" id="reset" value="Reset" />
+                    </div>
+                </fieldset>
+                <fieldset id="sort">
+                    <legend>Sort</legend>
+                </fieldset>
+            </form>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th style="width:50px">Index</th>
+                    <th style="width:200px">Name</th>
+                    <th style="width:50px">Temp</th>
+                    <th style="width:100px">Type</th>
+                    <th style="width:200px">Channels</th>
+                    <th style="width:100px">Tonifies</th>
+                    <th style="width:200px">Properties</th>
+                    <th style="width:50px">Pacifies</th>
+                    <th style="width:50px">Aggravates</th>
+                    <th style="width:50px">Chakra</th>
+                    <th style="width:50px;border:none">Notes</th>
+                </tr>
+            </table>
+        </div>
+        <script src="Scripts/script.js" type="module"></script>
     </body>
 </html>
