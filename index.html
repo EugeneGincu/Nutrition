@@ -34,26 +34,22 @@
                             <option value="LI">LI</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="temp">Temp</label>
-                        <select id="temp">
-                            <option value="">Any</option>
-                            <option value="Hot">Hot</option>
-                            <option value="Warm">Warm</option>
-                            <option value="Neutral">Neutral</option>
-                            <option value="Cool">Cool</option>
-                            <option value="Cold">Cold</option>
-                        </select>
+                    <div class="flex">
+                        <label><input type="radio" value="Hot" name="temp"/>Hot</label>
+                        <label><input type="radio" value="Warm" name="temp"/>Warm</label>
+                        <label><input type="radio" value="Neutral" name="temp"/>Neutral</label>
+                        <label><input type="radio" value="Cool" name="temp"/>Cool</label>
+                        <label><input type="radio" value="Cold" name="temp"/>Cold</label>
                     </div>
-                    <div>
-                        <label for="tonifies">Tonifies</label>
-                        <select id="tonifies" size=5 multiple>
-                            <option value="Qi">Qi</option>
-                            <option value="Yang">Yang</option>
-                            <option value="Blood">Blood</option>
-                            <option value="Jing">Jing</option>
-                            <option value="Yin">Yin</option>
-                        </select>
+                    <div id="tonifies" class="flex">
+<!--                        <label for="tonifies">Tonifies</label>-->
+<!--                        <select id="tonifies" size=5 multiple>-->
+                            <label><input type="checkbox" value="Qi">Qi</label>
+                            <label><input type="checkbox" value="Yang">Yang</label>
+                            <label><input type="checkbox" value="Blood">Blood</label>
+                            <label><input type="checkbox" value="Jing">Jing</label>
+                            <label><input type="checkbox" value="Yin">Yin</label>
+<!--                        </select>-->
                     </div>
                     <div>
                         <label for="properties">Properties</label>
@@ -75,7 +71,11 @@
                     </div>
                 </fieldset>
                 <fieldset id="sort">
-                    <legend>Sort</legend>
+                    <legend>Sort Channels</legend>
+                    <div>
+                        <label>Ascending<input type="radio" name="sort"/></label>
+                        <label>Descending<input type="radio" name="sort"/></label>
+                    </div>
                 </fieldset>
             </form>
         </div>

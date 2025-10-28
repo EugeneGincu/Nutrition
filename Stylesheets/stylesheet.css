@@ -28,7 +28,18 @@ label {
 }
 
 input {
+
+}
+
+input#name + input {
+    display:block;
+    margin: 20px auto;
+}
+
+div.flex {
     display:flex;
+    flex-direction: column;
+    text-align:left;
 }
 
 
