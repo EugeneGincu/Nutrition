@@ -25,12 +25,6 @@ let createRow = function(obj, index) {
 //Populate and clear table rows
 let populateTable = function(data) {
     let index = 0;
-    // if (filters) {
-    //     for (let elem of data)
-    //         if (elem['name'].toLowerCase().includes(filters.name.toLowerCase()))
-    //             createRow(elem, index++);
-    // }
-    // else
         for (let elem of data)
             createRow(elem, index++);
 
@@ -56,14 +50,18 @@ filterForm.addEventListener('input', function(event) {
             if (option.selected)
             filter.Channels.push(option.value);
     }
-    else if (event.target.id === 'temp') {
+    else if (event.target.name === 'temp') {
         filter.Temp = event.target.value;
     }
-    else if (event.target.id === 'tonifies') {
-        filter.Tonifies = [];
-        for (let option of event.target.options)
-            if (option.selected)
-                filter.Tonifies.push(option.value);
+    else if (event.target.matches('div#tonifies input')) {
+        if (event.target.checked) {
+            if (!filter.Tonifies.includes(event.target.value))
+                filter.Tonifies.push(event.target.value);
+        } else {
+            let ind = filter.Tonifies.indexOf(event.target.value);
+            if (ind !== -1)
+                filter.Tonifies.splice(ind, 1);
+        }
     }
     else if (event.target.id === 'properties') {
         filter.Properties = [];
@@ -81,6 +79,12 @@ filterForm.addEventListener('input', function(event) {
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase()))
     }));
 })
+
+// let sortForm = document.getElementById('sort');
+// sortForm.addEventListener('check', (event) => {
+//
+// })
+
 filterForm.form.addEventListener('submit', event => event.preventDefault());
 
 //Form buttons
@@ -93,3 +97,14 @@ document.querySelector('#reset').onclick = () => {
     filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[]};
     filterForm.dispatchEvent(new Event('input'));
 }
+// document.querySelector('div#radio input').onclick = (event) => {if (event.target.checked) event.target.checked = false;};
+// document.querySelector('div#radio').addEventListener('click', function (event) {
+//     if (event.target.type === 'radio') {
+//         if (event.target.checked) {
+//             if (event.target.wasChecked) {
+//                 event.target.checked = false;
+//             }
+//             event.target.wasChecked = !event.target.wasChecked;
+//         }
+//     }
+// });

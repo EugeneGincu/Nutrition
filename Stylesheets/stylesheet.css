@@ -1,11 +1,11 @@
 /* BODY */
 body {
-    background-color: floralwhite;
+    /*background-color: papayawhip;*/
 }
 
 /* TABLE */
 table {
-    /*background-color: white;*/
+    /*background-color: whitesmoke;*/
 }
 
 th {
@@ -20,15 +20,35 @@ form div {
 }
 
 fieldset {
-
+    display: flex;
+    flex-direction: row; /*default*/
+    flex-wrap: nowrap; /*default*/
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
 }
 
-label {
+fieldset#sort div label {
+    margin: 0 20px;
+}
 
+legend {
+    /*background-color: cornsilk;*/
 }
 
 input {
+
+}
+
+input#name + input {
+    display:block;
+    margin: 20px auto;
+}
+
+div.flex {
     display:flex;
+    flex-direction: column;
+    text-align:left;
 }
 
 
