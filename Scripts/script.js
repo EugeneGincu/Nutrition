@@ -70,20 +70,33 @@ filterForm.addEventListener('input', function(event) {
                 filter.Properties.push(option.value);
     }
 
-    //Repopulate table
+    displayData(filter);
+
+})
+
+//Repopulate table
+let displayData = function(filter) {
     clearTable();
-    populateTable(data.filter(element =>  {return element.Name.toLowerCase().includes(filter.Name.toLowerCase()) &&
+    populateTable(data.filter(element => {
+        return element.Name.toLowerCase().includes(filter.Name.toLowerCase()) &&
             filter.Channels.every(elem => element.Channels.toLowerCase().includes(elem.toLowerCase())) &&
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase()))
     }));
-})
+}
 
-// let sortForm = document.getElementById('sort');
-// sortForm.addEventListener('check', (event) => {
-//
-// })
+//Sort table
+let sortForm = document.getElementById('sort');
+sortForm.addEventListener('change', (event) => {
+    if (event.target.id === "ascending"){
+        data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length)
+    } else if (event.target.id === "descending"){
+        data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
+    }
+
+    displayData(filter);
+})
 
 filterForm.form.addEventListener('submit', event => event.preventDefault());
 

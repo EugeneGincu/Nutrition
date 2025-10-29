@@ -42,13 +42,13 @@
                         <label><input type="radio" value="Cold" name="temp"/>Cold</label>
                     </div>
                     <div id="tonifies" class="flex">
-<!--                        <label for="tonifies">Tonifies</label>-->
-<!--                        <select id="tonifies" size=5 multiple>-->
-                            <label><input type="checkbox" value="Qi">Qi</label>
-                            <label><input type="checkbox" value="Yang">Yang</label>
-                            <label><input type="checkbox" value="Blood">Blood</label>
-                            <label><input type="checkbox" value="Jing">Jing</label>
-                            <label><input type="checkbox" value="Yin">Yin</label>
+<!--                    <label for="tonifies">Tonifies</label>-->
+<!--                    <select id="tonifies" size=5 multiple>-->
+                        <label><input type="checkbox" value="Qi">Qi</label>
+                        <label><input type="checkbox" value="Yang">Yang</label>
+                        <label><input type="checkbox" value="Blood">Blood</label>
+                        <label><input type="checkbox" value="Jing">Jing</label>
+                        <label><input type="checkbox" value="Yin">Yin</label>
 <!--                        </select>-->
                     </div>
                     <div>
@@ -73,8 +73,11 @@
                 <fieldset id="sort">
                     <legend>Sort Channels</legend>
                     <div>
-                        <label>Ascending<input type="radio" name="sort"/></label>
-                        <label>Descending<input type="radio" name="sort"/></label>
+                        <span>
+                            Channels:
+                            <label>Ascending<input type="radio" id="ascending" name="sort"/></label>
+                            <label>Descending<input type="radio" id="descending" name="sort"/></label>
+                        </span>
                     </div>
                 </fieldset>
             </form>
