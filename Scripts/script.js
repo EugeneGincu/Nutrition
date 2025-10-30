@@ -110,6 +110,12 @@ document.querySelector('#reset').onclick = () => {
     filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[]};
     filterForm.dispatchEvent(new Event('input'));
 }
+
+//Top
+document.getElementById('top').addEventListener('click', function(){
+    location.href = "#filter";
+})
+
 // document.querySelector('div#radio input').onclick = (event) => {if (event.target.checked) event.target.checked = false;};
 // document.querySelector('div#radio').addEventListener('click', function (event) {
 //     if (event.target.type === 'radio') {

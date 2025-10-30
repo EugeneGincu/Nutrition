@@ -1,6 +1,8 @@
 /* BODY */
 body {
     /*background-color: papayawhip;*/
+    width:95%;
+    margin: auto;
 }
 
 /* TABLE */
@@ -49,6 +51,20 @@ div.flex {
     display:flex;
     flex-direction: column;
     text-align:left;
+}
+
+div#top {
+    background-color: black;
+    color: white;
+    font-size: 1.2em;
+    position: fixed;
+    right: 0;
+    bottom: 100px;
+    width: 50px;
+    height: 45px;
+    text-align: center;
+    align-content: center;
+    cursor: default;
 }
 
 
