@@ -25,6 +25,7 @@ fieldset {
     display: flex;
     flex-direction: row; /*default*/
     flex-wrap: nowrap; /*default*/
+    gap: 20px;
     justify-content: center;
     align-items: center;
     background-color: gainsboro;
@@ -51,6 +52,18 @@ div.flex {
     display:flex;
     flex-direction: column;
     text-align:left;
+}
+
+/* Buttons */
+div#theme {
+    position: fixed;
+    top: 30px;
+    right: 0;
+}
+
+.theme_black {
+    background-color: #202020;
+    color: lightgray;
 }
 
 div#top {
