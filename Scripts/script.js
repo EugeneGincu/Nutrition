@@ -111,7 +111,13 @@ document.querySelector('#reset').onclick = () => {
     filterForm.dispatchEvent(new Event('input'));
 }
 
-//Top
+//Buttons
+document.getElementById('theme').addEventListener('click', function() {
+    document.body.classList.toggle('theme_black');
+    filterForm.classList.toggle('theme_black');
+    sortForm.classList.toggle('theme_black');
+})
+
 document.getElementById('top').addEventListener('click', function(){
     location.href = "#filter";
 })

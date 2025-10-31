@@ -53,6 +53,18 @@ div.flex {
     text-align:left;
 }
 
+/* Buttons */
+div#theme {
+    position: fixed;
+    top: 30px;
+    right: 0;
+}
+
+.theme_black {
+    background-color: #202020;
+    color: lightgray;
+}
+
 div#top {
     background-color: black;
     color: white;
