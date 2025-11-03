@@ -15,32 +15,20 @@ th {
 }
 
 /* FORM */
-form div {
-    float: left;
-    margin: 0 10px;
-
+form {
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 fieldset {
     display: flex;
     flex-direction: row; /*default*/
     flex-wrap: nowrap; /*default*/
-    gap: 20px;
-    justify-content: center;
+    flex: 1 1 auto;
+    /*gap: 20px;*/
+    justify-content: space-evenly;
     align-items: center;
     background-color: gainsboro;
-}
-
-fieldset#sort div label {
-    margin: 0 20px;
-}
-
-legend {
-    /*background-color: cornsilk;*/
-}
-
-input {
-
 }
 
 input#name + input {
@@ -51,7 +39,8 @@ input#name + input {
 div.flex {
     display:flex;
     flex-direction: column;
-    text-align:left;
+    /*text-align:left;*/
+    align-items: flex-start;
 }
 
 /* Buttons */
