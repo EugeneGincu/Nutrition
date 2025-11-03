@@ -31,6 +31,10 @@ fieldset {
     background-color: gainsboro;
 }
 
+fieldset#sort {
+    flex: 0 1 15%;
+}
+
 input#name + input {
     display:block;
     margin: 20px auto;
