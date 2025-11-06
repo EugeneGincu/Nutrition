@@ -38,7 +38,7 @@ let clearTable = function() {
 populateTable(data);
 
 //Filter table from form input
-let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[]};
+let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[]};
 let filterForm = document.getElementById('filter');
 filterForm.addEventListener('input', function(event) {
     if (event.target.id === 'name') {
@@ -68,6 +68,12 @@ filterForm.addEventListener('input', function(event) {
         for (let option of event.target.options)
             if (option.selected)
                 filter.Properties.push(option.value);
+    }
+    else if (event.target.id === "type") {
+        filter.Type = [];
+        for (let option of event.target.options)
+            if (option.selected)
+                filter.Type.push(option.value);
     }
 
     displayData(filter);
@@ -102,8 +108,8 @@ filterForm.form.addEventListener('submit', event => event.preventDefault());
 
 //Form buttons
 document.querySelector('input#name + input').onclick = function () {
-    let name = document.getElementById('name')
-    name.value = ""
+    let name = document.getElementById('name');
+    name.value = "";
     name.dispatchEvent(new Event('input', {bubbles: true}));
 };
 document.querySelector('#reset').onclick = () => {
