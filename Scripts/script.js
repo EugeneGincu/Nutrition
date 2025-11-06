@@ -114,7 +114,7 @@ document.querySelector('input#name + input').onclick = function () {
     name.dispatchEvent(new Event('input', {bubbles: true}));
 };
 document.querySelector('#reset').onclick = () => {
-    filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[]};
+    filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[]};
     filterForm.dispatchEvent(new Event('input'));
 }
 
