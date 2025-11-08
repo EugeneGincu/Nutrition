@@ -22,13 +22,15 @@ let createRow = function(obj, index) {
     table.append(row);
 }
 
-//Populate and clear table rows
+//Populate table rows with filtered data
 let populateTable = function(data) {
     let index = 0;
         for (let elem of data)
             createRow(elem, index++);
 
 }
+
+//Deletes all rows except header
 let clearTable = function() {
     while(table.rows.length > 1){
         table.deleteRow(1);
@@ -37,8 +39,9 @@ let clearTable = function() {
 
 populateTable(data);
 
-//Filter table from form input
-let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[]};
+//Filter Function
+//Creates "filter", an array of filters
+let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
 let filterForm = document.getElementById('filter');
 filterForm.addEventListener('input', function(event) {
     if (event.target.id === 'name') {
@@ -75,12 +78,21 @@ filterForm.addEventListener('input', function(event) {
             if (option.selected)
                 filter.Type.push(option.value);
     }
+    // else if (event.target.id === "notType") {
+    //     filter.NotType = [];
+    //     for (let option of event.target.options)
+    //         if (option.selected)
+    //             filter.Type.push(option.value);
+    // }
 
+    //Refresh table
     displayData(filter);
 
 });
 
 //Repopulate table
+//Clears then populates table with filtered data
+//Uses "filter" array to filter the data rows
 let displayData = function(filter) {
     clearTable();
     populateTable(data.filter(element => {
@@ -89,11 +101,13 @@ let displayData = function(filter) {
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
-            filter.Type.every(elem => element.Type.toLowerCase().includes(elem.toLowerCase()));
+            (filter.Type.length === 0 ||filter.Type.some(elem => element.Type.toLowerCase() === elem.toLowerCase()));
+            // !filter.NotType.every(elem => element.Type.toLowerCase().includes(elem.toLowerCase()));
     }));
 }
 
-//Sort table
+//Sort Function
+//
 let sortForm = document.getElementById('sort');
 sortForm.addEventListener('change', (event) => {
     if (event.target.id === "ascending"){
@@ -114,7 +128,7 @@ document.querySelector('input#name + input').onclick = function () {
     name.dispatchEvent(new Event('input', {bubbles: true}));
 };
 document.querySelector('#reset').onclick = () => {
-    filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[]};
+    filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
     filterForm.dispatchEvent(new Event('input'));
 }
 
