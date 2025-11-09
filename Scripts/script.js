@@ -40,7 +40,7 @@ let clearTable = function() {
 populateTable(data);
 
 //Filter Function
-//Creates "filter", an array of filters
+//Creates "filter", an object of filters
 let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
 let filterForm = document.getElementById('filter');
 filterForm.addEventListener('input', function(event) {
@@ -78,12 +78,12 @@ filterForm.addEventListener('input', function(event) {
             if (option.selected)
                 filter.Type.push(option.value);
     }
-    // else if (event.target.id === "notType") {
-    //     filter.NotType = [];
-    //     for (let option of event.target.options)
-    //         if (option.selected)
-    //             filter.Type.push(option.value);
-    // }
+    else if (event.target.id === "notType") {
+        filter.NotType = [];
+        for (let option of event.target.options)
+            if (option.selected)
+                filter.NotType.push(option.value);
+    }
 
     //Refresh table
     displayData(filter);
@@ -101,8 +101,8 @@ let displayData = function(filter) {
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
-            (filter.Type.length === 0 ||filter.Type.some(elem => element.Type.toLowerCase() === elem.toLowerCase()));
-            // !filter.NotType.every(elem => element.Type.toLowerCase().includes(elem.toLowerCase()));
+            (filter.Type.length === 0 || filter.Type.some(elem => element.Type.toLowerCase() === elem.toLowerCase())) &&
+             (filter.NotType.length === 0 || filter.NotType.every(elem => element.Type.toLowerCase() !== elem.toLowerCase()));
     }));
 }
 
@@ -120,12 +120,14 @@ sortForm.addEventListener('change', (event) => {
 
 filterForm.form.addEventListener('submit', event => event.preventDefault());
 
-//Form buttons
+//Clear "Name" input field button
 document.querySelector('input#name + input').onclick = function () {
     let name = document.getElementById('name');
     name.value = "";
     name.dispatchEvent(new Event('input', {bubbles: true}));
 };
+
+//Reset form button
 document.querySelector('#reset').onclick = () => {
     filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
     filterForm.dispatchEvent(new Event('input'));
