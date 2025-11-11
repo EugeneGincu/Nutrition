@@ -10,8 +10,18 @@ table {
     /*background-color: whitesmoke;*/
 }
 
+table tbody{
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
 th {
     border-right: 1px solid gray;
+}
+
+table tr:nth-child(even) {
+    background-color: #E5E5E5;
 }
 
 /* FORM */
@@ -64,18 +74,13 @@ div#theme {
 .theme_black {
     background-color: #202020;
     color: lightgray;
-}
+    table tbody {
+        background-color: #202020;
+    }
 
-/* Buttons */
-div#theme {
-    position: fixed;
-    top: 30px;
-    right: 0;
-}
-
-.theme_black {
-    background-color: #202020;
-    color: lightgray;
+    table tr:nth-child(even) {
+        background-color: #333333;
+    }
 }
 
 div#top {
