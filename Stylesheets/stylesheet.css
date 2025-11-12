@@ -12,7 +12,7 @@ table {
 
 table tbody{
     position: sticky;
-    top: 0;
+    top: 143px;
     background-color: white;
 }
 
@@ -25,6 +25,11 @@ table tr:nth-child(even) {
 }
 
 /* FORM */
+div:has(form) {
+    position: sticky;
+    top: 0;
+}
+
 form {
     display: flex;
     flex-flow: row nowrap;
@@ -67,8 +72,9 @@ label:has( + select) {
 /* Buttons */
 div#theme {
     position: fixed;
-    top: 30px;
+    top: 155px;
     right: 0;
+    z-index: 1;
 }
 
 .theme_black {
