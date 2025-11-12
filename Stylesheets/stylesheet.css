@@ -14,7 +14,12 @@ table tbody{
     position: sticky;
     top: 143px;
     background-color: white;
+    outline: 1px solid gray;
 }
+
+/*table tbody tr th:nth-child(even) {*/
+/*    background-color:#E5E5E5;*/
+/*}*/
 
 th {
     border-right: 1px solid gray;
