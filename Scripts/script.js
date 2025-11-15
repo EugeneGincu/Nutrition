@@ -6,7 +6,7 @@ const data = await response.json();
 
 //Create single row from data
 let table = document.querySelector('table');
-let createRow = function(obj, index) {
+function createRow(obj, index) {
     let row = document.createElement('tr');
     let ind = document.createElement('th');
     ind.textContent = index;
@@ -23,7 +23,7 @@ let createRow = function(obj, index) {
 }
 
 //Populate table rows with filtered data
-let populateTable = function(data) {
+function populateTable(data) {
     let index = 0;
         for (let elem of data)
             createRow(elem, index++);
@@ -31,17 +31,23 @@ let populateTable = function(data) {
 }
 
 //Deletes all rows except header
-let clearTable = function() {
+function clearTable() {
     while(table.rows.length > 1){
         table.deleteRow(1);
     }
 }
 
-populateTable(data);
+//Resets filter
+function resetFilter() {
+    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:["Chinese Herbs"]};
+}
+
+
+// populateTable(data);
 
 //Filter Function
 //Creates "filter", an object of filters
-let filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
+let filter = resetFilter();
 let filterForm = document.getElementById('filter');
 filterForm.addEventListener('input', function(event) {
     if (event.target.id === 'name') {
@@ -93,7 +99,7 @@ filterForm.addEventListener('input', function(event) {
 //Repopulate table
 //Clears then populates table with filtered data
 //Uses "filter" array to filter the data rows
-let displayData = function(filter) {
+function displayData(filter) {
     clearTable();
     populateTable(data.filter(element => {
         return element.Name.toLowerCase().includes(filter.Name.toLowerCase()) &&
@@ -124,6 +130,9 @@ sortForm.addEventListener('change', (event) => {
 
 filterForm.form.addEventListener('submit', event => event.preventDefault());
 
+
+filterForm.dispatchEvent(new Event('input'));
+
 //Clear "Name" input field button
 document.querySelector('input#name + input').onclick = function () {
     let name = document.getElementById('name');
@@ -133,7 +142,7 @@ document.querySelector('input#name + input').onclick = function () {
 
 //Reset form button
 document.querySelector('#reset').onclick = () => {
-    filter = {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
+    filter = resetFilter();
     filterForm.dispatchEvent(new Event('input'));
 }
 
