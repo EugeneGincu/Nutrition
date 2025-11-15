@@ -133,15 +133,17 @@ document.querySelector('#reset').onclick = () => {
     filterForm.dispatchEvent(new Event('input'));
 }
 
-//Buttons
+//Button - Theme
 document.getElementById('theme').addEventListener('click', function() {
     document.body.classList.toggle('theme_black');
     filterForm.classList.toggle('theme_black');
     sortForm.classList.toggle('theme_black');
 })
 
+//Button - Top
 document.getElementById('top').addEventListener('click', function(){
-    location.href = "#filter";
+    // location.href = "#topRow";
+    window.scrollTo(0,0);
 })
 
 // document.querySelector('div#radio input').onclick = (event) => {if (event.target.checked) event.target.checked = false;};
