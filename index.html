@@ -116,10 +116,20 @@
                     </div>
                 </fieldset>
                 <fieldset id="sort">
-                    <legend>Sort Channels</legend>
-                    <div class="flex">
-                            <label><input type="radio" id="ascending" name="sort"/>Ascending</label>
-                            <label><input type="radio" id="descending" name="sort"/>Descending</label>
+                    <legend>Sort</legend>
+                    <div class="sort">
+                        <label></label>
+                        <label>Asc</label>
+                        <label>Dsc</label>
+<!--                        <label>Name</label>-->
+<!--                        <input type="radio" id="asc_Name" name="sort"/>-->
+<!--                        <input type="radio" id="des_Name" name="sort"/>-->
+                        <label>Type</label>
+                        <label><input type="radio" id="asc_Type" name="sort"/></label>
+                        <label><input type="radio" id="des_Type" name="sort"/></label>
+                        <label style="justify-self:start;">Channels</label>
+                        <label><input type="radio" id="asc_Channels" name="sort"/></label>
+                        <label><input type="radio" id="des_Channels" name="sort"/></label>
                     </div>
                 </fieldset>
             </form>

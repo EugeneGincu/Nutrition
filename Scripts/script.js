@@ -109,9 +109,13 @@ let displayData = function(filter) {
 //Sort Function
 let sortForm = document.getElementById('sort');
 sortForm.addEventListener('change', (event) => {
-    if (event.target.id === "ascending"){
-        data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length)
-    } else if (event.target.id === "descending"){
+    if (event.target.id === "asc_Type") {
+        data.sort((a,b) => a.Type.localeCompare(b.Type));
+    } else if (event.target.id === "des_Type") {
+        data.sort((a,b) => b.Type.localeCompare(a.Type));
+    } else if (event.target.id === "asc_Channels"){
+        data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length);
+    } else if (event.target.id === "des_Channels"){
         data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
     }
 

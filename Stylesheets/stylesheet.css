@@ -77,6 +77,13 @@ label:has( + select) {
     /*outline: 1px solid red;*/
 }
 
+.sort {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    justify-items:right;
+}
+
 /* Buttons */
 div#theme {
     position: fixed;
