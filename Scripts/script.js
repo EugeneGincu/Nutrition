@@ -39,7 +39,7 @@ function clearTable() {
 
 //Resets filter
 function resetFilter() {
-    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:["Chinese Herbs"]};
+    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
 }
 
 
