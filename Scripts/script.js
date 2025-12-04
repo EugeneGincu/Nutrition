@@ -4,6 +4,7 @@
 const response = await fetch("Data/Nutrition.json");
 const data = await response.json();
 
+
 //Create single row from data
 let table = document.querySelector('table');
 function createRow(obj, index) {
@@ -39,9 +40,8 @@ function clearTable() {
 
 //Resets filter
 function resetFilter() {
-    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], Type:[], NotType:[]};
+    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], NotProperties:[], Type:[], NotType:[]};
 }
-
 
 // populateTable(data);
 
@@ -90,6 +90,12 @@ filterForm.addEventListener('input', function(event) {
             if (option.selected)
                 filter.NotType.push(option.value);
     }
+    else if (event.target.id === "notProperties") {
+        filter.NotProperties = [];
+        for (let option of event.target.options)
+            if (option.selected)
+                filter.NotProperties.push(option.value);
+    }
 
     //Refresh table
     displayData(filter);
@@ -107,8 +113,9 @@ function displayData(filter) {
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
-            (filter.Type.length === 0 || filter.Type.some(elem => element.Type.toLowerCase() === elem.toLowerCase())) &&
-             (filter.NotType.length === 0 || filter.NotType.every(elem => element.Type.toLowerCase() !== elem.toLowerCase()));
+            (filter.Type.length === 0 || filter.Type.some(elem => element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
+             (filter.NotType.length === 0 || filter.NotType.every(elem => !element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
+             (filter.NotProperties.length === 0 || filter.NotProperties.every(elem => element.Properties.toLowerCase().split(',').every(prop => !prop.includes(elem.toLowerCase()))));
     }));
 }
 
