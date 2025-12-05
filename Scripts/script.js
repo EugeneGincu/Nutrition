@@ -4,7 +4,6 @@
 const response = await fetch("Data/Nutrition.json");
 const data = await response.json();
 
-
 //Create single row from data
 let table = document.querySelector('table');
 function createRow(obj, index) {
