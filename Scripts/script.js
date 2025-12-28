@@ -129,6 +129,10 @@ sortForm.addEventListener('change', (event) => {
         data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length);
     } else if (event.target.id === "des_Channels"){
         data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
+    } else if (event.target.id === "asc_Properties") {
+        data.sort((a,b) => a.Properties.split(",").length - b.Properties.split(",").length);
+    } else if (event.target.id === "des_Properties") {
+        data.sort((a,b) => b.Properties.split(",").length - a.Properties.split(",").length);
     }
 
     displayData(filter);
