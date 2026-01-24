@@ -4,6 +4,14 @@
 const response = await fetch("Data/Nutrition.json");
 const data = await response.json();
 
+
+data.forEach(entry => {
+    entry.Channels = new Set(entry.Channels.split(','));
+    // console.log(entry.Channels);
+});
+
+// console.log((new Set(['a','b','c'])).isSubsetOf(new Set(['a', 'd', 'e'])));
+
 //Create single row from data
 let table = document.querySelector('table');
 function createRow(obj, index) {
@@ -15,18 +23,22 @@ function createRow(obj, index) {
 
     for (let key in obj) {
         let cell = document.createElement('td');
-        cell.textContent = obj[key];
+        if (obj[key] instanceof Set)
+            cell.textContent = [...obj[key]];
+        else
+            cell.textContent = obj[key];
         row.append(cell);
     }
 
     table.append(row);
 }
 
+
 //Populate table rows with filtered data
 function populateTable(data) {
     let index = 0;
-        for (let elem of data)
-            createRow(elem, index++);
+    for (let elem of data)
+        createRow(elem, index++);
 
 }
 
@@ -39,7 +51,7 @@ function clearTable() {
 
 //Resets filter
 function resetFilter() {
-    return {Name:"", Channels:[], Temp:"", Tonifies:[], Properties:[], NotProperties:[], Type:[], NotType:[]};
+    return {Name:"", Channels:new Set(), Temp:"", Tonifies:[], Properties:[], NotProperties:[], Type:[], NotType:[]};
 }
 
 // populateTable(data);
@@ -53,10 +65,17 @@ filterForm.addEventListener('input', function(event) {
         filter.Name = event.target.value;
     }
     else if (event.target.id === 'channels') {
-        filter.Channels = [];
+        // filter.Channels = [];
+        // for (let option of event.target.options)
+        //     if (option.selected)
+        //     filter.Channels.push(option.value);
+
+        filter.Channels = new Set();
         for (let option of event.target.options)
             if (option.selected)
-            filter.Channels.push(option.value);
+                filter.Channels.add(option.value.toLowerCase());
+        console.log("In filter: ");
+        console.log(filter.Channels);
     }
     else if (event.target.name === 'temp') {
         filter.Temp = event.target.value;
@@ -107,8 +126,10 @@ filterForm.addEventListener('input', function(event) {
 function displayData(filter) {
     clearTable();
     populateTable(data.filter(element => {
+        // console.log(element.Channels)
         return element.Name.toLowerCase().includes(filter.Name.toLowerCase()) &&
-            filter.Channels.every(elem => element.Channels.toLowerCase().includes(elem.toLowerCase())) &&
+            // filter.Channels.every(elem => element.Channels.toLowerCase().includes(elem.toLowerCase())) &&
+            (filter.Channels.size === 0 || setTrimmer(filter.Channels).isSubsetOf(setTrimmer(element.Channels))) &&
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
             filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
@@ -126,9 +147,11 @@ sortForm.addEventListener('change', (event) => {
     } else if (event.target.id === "des_Type") {
         data.sort((a,b) => b.Type.localeCompare(a.Type));
     } else if (event.target.id === "asc_Channels"){
-        data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length);
+        // data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length);
+        data.sort((a,b) => a.Channels.size - b.Channels.size);
     } else if (event.target.id === "des_Channels"){
-        data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
+        // data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
+        data.sort((a,b) => b.Channels.size - a.Channels.size);
     } else if (event.target.id === "asc_Properties") {
         data.sort((a,b) => a.Properties.split(",").length - b.Properties.split(",").length);
     } else if (event.target.id === "des_Properties") {
@@ -142,6 +165,14 @@ filterForm.form.addEventListener('submit', event => event.preventDefault());
 
 
 filterForm.dispatchEvent(new Event('input'));
+
+function setTrimmer(set) {
+    set = [...set].map(x => x.toLowerCase().trim().replace('?', ''));
+    set = new Set(set);
+    // console.log("Trimmed: ");
+    // console.log(set);
+    return set;
+}
 
 //Clear "Name" input field button
 document.querySelector('input#name + input').onclick = function () {
