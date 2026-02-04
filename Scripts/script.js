@@ -7,6 +7,8 @@ const data = await response.json();
 
 data.forEach(entry => {
     entry.Channels = new Set(entry.Channels.split(','));
+    entry.Properties = new Set(entry.Properties.split(','));
+    // entry.Type = new Set(entry.Type.split(','));
     // console.log(entry.Channels);
 });
 
@@ -51,7 +53,7 @@ function clearTable() {
 
 //Resets filter
 function resetFilter() {
-    return {Name:"", Channels:new Set(), Temp:"", Tonifies:[], Properties:[], NotProperties:[], Type:[], NotType:[]};
+    return {Name:"", Channels:new Set(), Temp:"", Tonifies:[], Properties:new Set(), NotProperties:new Set(), Type:[], NotType:[]};
 }
 
 // populateTable(data);
@@ -74,8 +76,8 @@ filterForm.addEventListener('input', function(event) {
         for (let option of event.target.options)
             if (option.selected)
                 filter.Channels.add(option.value.toLowerCase());
-        console.log("In filter: ");
-        console.log(filter.Channels);
+        // console.log("In filter: ");
+        // console.log(filter.Channels);
     }
     else if (event.target.name === 'temp') {
         filter.Temp = event.target.value;
@@ -91,28 +93,48 @@ filterForm.addEventListener('input', function(event) {
         }
     }
     else if (event.target.id === 'properties') {
-        filter.Properties = [];
+        // filter.Properties = [];
+        // for (let option of event.target.options)
+        //     if (option.selected)
+        //         filter.Properties.push(option.value);
+
+        filter.Properties = new Set();
         for (let option of event.target.options)
             if (option.selected)
-                filter.Properties.push(option.value);
+                filter.Properties.add(option.value.toLowerCase());
+        console.log(filter.Properties);
     }
     else if (event.target.id === "type") {
         filter.Type = [];
         for (let option of event.target.options)
             if (option.selected)
                 filter.Type.push(option.value);
+
+        // filter.Type = new Set();
+        // for (let option of event.target.options)
+        //     if (option.selected)
+        //         filter.Type.add(option.value.toLowerCase());
+        // console.log("In filter: ");
+        // console.log(filter.Type);
     }
     else if (event.target.id === "notType") {
         filter.NotType = [];
         for (let option of event.target.options)
             if (option.selected)
                 filter.NotType.push(option.value);
+
+
     }
     else if (event.target.id === "notProperties") {
-        filter.NotProperties = [];
+        // filter.NotProperties = [];
+        // for (let option of event.target.options)
+        //     if (option.selected)
+        //         filter.NotProperties.push(option.value);
+
+        filter.NotProperties = new Set();
         for (let option of event.target.options)
             if (option.selected)
-                filter.NotProperties.push(option.value);
+                filter.NotProperties.add(option.value);
     }
 
     //Refresh table
@@ -132,10 +154,14 @@ function displayData(filter) {
             (filter.Channels.size === 0 || setTrimmer(filter.Channels).isSubsetOf(setTrimmer(element.Channels))) &&
             element.Temp.toLowerCase().includes(filter.Temp.toLowerCase()) &&
             filter.Tonifies.every(elem => element.Tonifies.toLowerCase().includes(elem.toLowerCase())) &&
-            filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
+            // filter.Properties.every(elem => element.Properties.toLowerCase().includes(elem.toLowerCase())) &&
+            (filter.Properties.size === 0 || setTrimmer(filter.Properties).isSubsetOf(setTrimmer(element.Properties))) &&
+            // !console.log(Boolean(!console.log((filter.Properties.size === 0 || setTrimmer(filter.Properties).isSubsetOf(setTrimmer(element.Properties)))))) &&
             (filter.Type.length === 0 || filter.Type.some(elem => element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
-             (filter.NotType.length === 0 || filter.NotType.every(elem => !element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
-             (filter.NotProperties.length === 0 || filter.NotProperties.every(elem => element.Properties.toLowerCase().split(',').every(prop => !prop.includes(elem.toLowerCase()))));
+            // (filter.Type.size === 0 || setTrimmer(filter.Type).isSubsetOf(setTrimmer(element.Type)))
+            (filter.NotType.length === 0 || filter.NotType.every(elem => !element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
+             // (filter.NotProperties.length === 0 || filter.NotProperties.every(elem => element.Properties.toLowerCase().split(',').every(prop => !prop.includes(elem.toLowerCase()))));
+            (filter.NotProperties.size === 0 || !setTrimmer(filter.NotProperties).isSubsetOf(setTrimmer(element.Properties)))
     }));
 }
 
@@ -144,8 +170,10 @@ let sortForm = document.getElementById('sort');
 sortForm.addEventListener('change', (event) => {
     if (event.target.id === "asc_Type") {
         data.sort((a,b) => a.Type.localeCompare(b.Type));
+        // data.sort((a,b) => a.Type.size - b.Type.size);
     } else if (event.target.id === "des_Type") {
         data.sort((a,b) => b.Type.localeCompare(a.Type));
+        // data.sort((a,b) => b.Type.size - a.Type.size);
     } else if (event.target.id === "asc_Channels"){
         // data.sort((a,b) => a.Channels.split(",").length - b.Channels.split(",").length);
         data.sort((a,b) => a.Channels.size - b.Channels.size);
@@ -153,9 +181,11 @@ sortForm.addEventListener('change', (event) => {
         // data.sort((a,b) => b.Channels.split(",").length - a.Channels.split(",").length);
         data.sort((a,b) => b.Channels.size - a.Channels.size);
     } else if (event.target.id === "asc_Properties") {
-        data.sort((a,b) => a.Properties.split(",").length - b.Properties.split(",").length);
+        // data.sort((a,b) => a.Properties.split(",").length - b.Properties.split(",").length);
+        data.sort((a,b) => a.Properties.size - b.Properties.size);
     } else if (event.target.id === "des_Properties") {
-        data.sort((a,b) => b.Properties.split(",").length - a.Properties.split(",").length);
+        // data.sort((a,b) => b.Properties.split(",").length - a.Properties.split(",").length);
+        data.sort((a,b) => b.Properties.size - a.Properties.size);
     }
 
     displayData(filter);
