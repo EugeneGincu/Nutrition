@@ -170,7 +170,11 @@ function displayData(filter) {
 //Sort Function
 let sortForm = document.getElementById('sort');
 sortForm.addEventListener('change', (event) => {
-    if (event.target.id === "asc_Type") {
+    if (event.target.id === "asc_Name") {
+        data.sort((a,b) => a.Name.localeCompare(b.Name));
+    } else if (event.target.id === "des_Name") {
+        data.sort((a,b) => b.Name.localeCompare(a.Name));
+    } else if (event.target.id === "asc_Type") {
         data.sort((a,b) => a.Type.localeCompare(b.Type));
         // data.sort((a,b) => a.Type.size - b.Type.size);
     } else if (event.target.id === "des_Type") {
