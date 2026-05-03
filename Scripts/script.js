@@ -163,7 +163,8 @@ function displayData(filter) {
             // (filter.Type.size === 0 || setTrimmer(filter.Type).isSubsetOf(setTrimmer(element.Type)))
             (filter.NotType.length === 0 || filter.NotType.every(elem => !element.Type.toLowerCase().includes(elem.toLowerCase()))) &&
              // (filter.NotProperties.length === 0 || filter.NotProperties.every(elem => element.Properties.toLowerCase().split(',').every(prop => !prop.includes(elem.toLowerCase()))));
-            (filter.NotProperties.size === 0 || !setTrimmer(filter.NotProperties).isSubsetOf(setTrimmer(element.Properties)))
+            //(filter.NotProperties.size === 0 || !setTrimmer(filter.NotProperties).isSubsetOf(setTrimmer(element.Properties)))
+			(filter.NotProperties.size === 0 || [...setTrimmer(filter.NotProperties)].every(elem => !setTrimmer(element.Properties).has(elem)))//.isSubsetOf(setTrimmer(element.Properties)))
     }));
 }
 
